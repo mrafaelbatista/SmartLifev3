@@ -1,0 +1,39 @@
+<resources>
+    <string name="app_name">Smart Life</string>
+    <string name="title_activity_maps">Map</string>
+
+
+    <!--Main Autenticação-->
+    <string name="title_activity_main">Autenticação</string>
+    <string name="loginAut">Dados de login...</string>
+    <string name="senhaAut">Senha...</string>
+    <string name="conectadoAut">Manter conectado.</string>
+    <string name="acessarAut">Acessar</string>
+
+
+    <!--Cadastrar Treino-->
+    <string name="title_activity_cadastrar_treino">Cadastrar Treino</string>
+    <string name="tituloCadTreino">Cadastrar Treino</string>
+    <string name="nometreinoCadTreino">Nome do Treino</string>
+    <string name="objCadTreino">Objetivo do Treino</string>
+    <string name="atividadeCadTreino">Lista de Atividades</string>
+    <string name="semAtividadesCadTreino">Sem atividades.\nPor favor clique em adicionar atividades.</string>
+    <string name="adicionarCadTreino">Adicionar Atividades</string>
+    <string name="salvarCadTreino">Salvar Treino</string>
+
+
+    <!--Cadastrar Atividades-->
+    <string name="title_activity_cadastrar_atividades">CadastrarAtividades</string>
+    <string name="cadAtividades">Selecione as Atividades</string>
+    <string name="salvarAtividades">Salvar Atividades</string>
+        <!--Exercícios Abdominais-->
+    <string name="abdomFrontal">Abdominal Frontal</string>
+    <string name="abdomBike">Abdominal Bike</string>
+    <string name="abdomInversao">Abdominal com Inversão</string>
+        <!--Exercícios Bíceps-->
+    <string name="bicepsRoscaConcent">Bíceps Rosca Concentrada</string>
+    <string name="bicepsRoscaDireta">Bíceps Rosca Direta</string>
+    <string name="bicepsRoscaAlternada">Bíceps Rosca Alternada</string>
+
+
+</resources>
