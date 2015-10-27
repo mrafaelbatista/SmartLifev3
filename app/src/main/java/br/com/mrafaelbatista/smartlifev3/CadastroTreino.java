@@ -9,11 +9,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
 import br.com.mrafaelbatista.smartlifev3.Controllers.ControllerCadastroTreino;
 import br.com.mrafaelbatista.smartlifev3.models.Atividade;
+import br.com.mrafaelbatista.smartlifev3.models.Treino;
 
 public class CadastroTreino extends AppCompatActivity {
 
@@ -21,7 +23,6 @@ public class CadastroTreino extends AppCompatActivity {
     private EditText objTreino;
     private ArrayList<Atividade> atividades;
     private TextView listaAtividadesTreino;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +39,6 @@ public class CadastroTreino extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
-
 
         nomeTreino = (EditText) findViewById(R.id.nomeTreino);
         objTreino = (EditText) findViewById(R.id.objTreino);
@@ -85,6 +85,31 @@ public class CadastroTreino extends AppCompatActivity {
         ControllerCadastroTreino.getInstance().setListaAtividades(atividades);
         //Envia instância da classe por Intent
         Intent i = new Intent(CadastroTreino.this, CadastroAtividades.class);
+        startActivity(i);
+    }
+
+    public void salvarTreino (View v) {
+
+        String nT = (String) nomeTreino.getText().toString();
+        String oT = (String) objTreino.getText().toString();
+        String aT;
+        StringBuffer strBuffer = new StringBuffer();
+
+        ArrayList<Atividade> alAtv = (ArrayList) ControllerCadastroTreino.getInstance().getListaAtividades();
+        for (Atividade a : atividades) {
+            strBuffer.append(a);
+            }
+
+        aT = strBuffer.toString();
+
+
+        Treino tr = new Treino(nT, oT, aT);
+        tr.save();
+        Toast.makeText(this, "Treino CADASTRADO com SUCESSO", Toast.LENGTH_LONG).show();
+
+
+        //Realizando teste
+        Intent i = new Intent(CadastroTreino.this, ListaTreino.class);
         startActivity(i);
     }
 

@@ -24,14 +24,14 @@
         android:layout_height="50dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="30dp"
-        android:text="@string/nometreinoCadTreino" />
+        android:hint="@string/nometreinoCadTreino" />
 
     <EditText
         android:id="@+id/objTreino"
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_gravity="center_horizontal"
-        android:text="@string/objCadTreino" />
+        android:hint="@string/objCadTreino" />
 
     <Button
         android:id="@+id/adicionarAtividadesTreino"
@@ -67,6 +67,7 @@
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
+        android:onClick="salvarTreino"
         android:text="@string/salvarCadTreino" />
 
 </LinearLayout>

@@ -1,16 +1,28 @@
 package br.com.mrafaelbatista.smartlifev3.models;
 
+import com.orm.SugarRecord;
+
 import java.util.ArrayList;
-import java.util.List;
+
 
 /**
  * Created by mrafa on 26/10/2015.
  */
-public class Treino {
+public class Treino extends SugarRecord<Treino> {
 
     private String nomeTreino;
     private String objetivoTreino;
-    private ArrayList<Atividade> listaAtividades;
+    private String atividades;
+//    private ArrayList<Atividade> listaAtividades;
+
+    public Treino() {
+    }
+
+    public Treino(String nomeTreino, String objetivoTreino, String atividades) {
+        this.nomeTreino = nomeTreino;
+        this.objetivoTreino = objetivoTreino;
+        this.atividades = atividades;
+    }
 
     public String getNomeTreino() {
         return nomeTreino;
@@ -28,11 +40,19 @@ public class Treino {
         this.objetivoTreino = objetivoTreino;
     }
 
-    public ArrayList<Atividade> getListaAtividades() {
-        return listaAtividades;
+    public String getAtividades() {
+        return atividades;
     }
 
-    public void setListaAtividades(ArrayList<Atividade> listaAtividades) {
-        this.listaAtividades = listaAtividades;
+    public void setAtividades(String atividades) {
+        this.atividades = atividades;
     }
+
+//    public ArrayList<Atividade> getListaAtividades() {
+//        return listaAtividades;
+//    }
+//
+//    public void setListaAtividades(ArrayList<Atividade> listaAtividades) {
+//        this.listaAtividades = listaAtividades;
+//    }
 }

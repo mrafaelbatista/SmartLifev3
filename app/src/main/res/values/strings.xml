@@ -34,6 +34,7 @@
     <string name="bicepsRoscaConcent">Bíceps Rosca Concentrada</string>
     <string name="bicepsRoscaDireta">Bíceps Rosca Direta</string>
     <string name="bicepsRoscaAlternada">Bíceps Rosca Alternada</string>
+    <string name="title_activity_lista_treino">ListaTreino</string>
 
 
 </resources>

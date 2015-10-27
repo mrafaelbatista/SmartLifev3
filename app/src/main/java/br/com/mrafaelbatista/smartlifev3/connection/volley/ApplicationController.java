@@ -9,12 +9,13 @@ import com.android.volley.RequestQueue;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
+import com.orm.SugarApp;
 
 import br.com.mrafaelbatista.smartlifev3.connection.volley.image.BitmapLruCache;
 
 //EXECUTA AO ABRIR O APP - COLOCAR NO ANDROIDMANIFEST
 //EXTENDS DE APPLICATION ou Sugar
-public class ApplicationController extends Application {
+public class ApplicationController extends SugarApp {
 
 	public static final String TAG = "VolleyPatterns";
 
