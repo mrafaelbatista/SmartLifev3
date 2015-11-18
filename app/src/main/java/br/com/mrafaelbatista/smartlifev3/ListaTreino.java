@@ -1,53 +1,84 @@
 package br.com.mrafaelbatista.smartlifev3;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import org.w3c.dom.Text;
+import java.util.ArrayList;
 
-import java.util.List;
-
-import br.com.mrafaelbatista.smartlifev3.R;
+import br.com.mrafaelbatista.smartlifev3.adapters.TreinoAdapterListView;
 import br.com.mrafaelbatista.smartlifev3.models.Treino;
 
-public class ListaTreino extends AppCompatActivity {
+public class ListaTreino extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
-    private TextView textView;
+    private ListView lv;
+    private TreinoAdapterListView adapter;
+    private ArrayList<Treino> alistTreinos;
+    private TextView tv_Semtreinos;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_lista_treino);
+        setContentView(R.layout.activity_lista_treinos);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
-        textView = (TextView) findViewById(R.id.id_textView);
         StringBuffer result = new StringBuffer();
-        result.append("Resultado busca: \n\n");
+        alistTreinos = new ArrayList<Treino>();
+        alistTreinos = (ArrayList<Treino>) Treino.listAll(Treino.class);
 
-        List<Treino> treinoList = Treino.listAll(Treino.class);
-        for (Treino t : treinoList) {
-            result.append("Nome: " + t.getNomeTreino() + "|" + "Objetivo:" + t.getObjetivoTreino() + "\n");
+        if (alistTreinos.isEmpty()) {
+            lv = (ListView) findViewById(R.id.lv_Treinos);
+            adapter = new TreinoAdapterListView(this, R.layout.itemlist_treino, alistTreinos);
+            lv.setAdapter(adapter);
+            lv.setOnItemClickListener(this);
+        } else {
+            tv_Semtreinos = (TextView) findViewById(R.id.tv_ListaTreino);
+            tv_Semtreinos.setVisibility(View.VISIBLE);
         }
 
-        textView.setText(result.toString());
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main2, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        if (id == R.id.mn_sair) {
+            Intent intent = new Intent(Intent.ACTION_MAIN);
+            intent.addCategory(Intent.CATEGORY_HOME);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
 
-
-
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Treino t = adapter.getItem(position);
+        Toast.makeText(ListaTreino.this, t.getNomeTreino() + " : " + t.getObjetivoTreino(), Toast.LENGTH_SHORT).show();
+    }
 }

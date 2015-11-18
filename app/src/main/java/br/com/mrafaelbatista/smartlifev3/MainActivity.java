@@ -3,12 +3,14 @@ package br.com.mrafaelbatista.smartlifev3;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Layout;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -29,9 +31,10 @@ public class MainActivity extends AppCompatActivity implements Response.ErrorLis
     private EditText et_password;
     private CheckBox cb_manterConectado;
     private ProgressDialog progress;
+    private View vBack;
 
     //Atributos para o volley
-    String url;
+    private String url;
 
     //Instância de Dados Login
     DadosLogin dadosLogin = new DadosLogin();
@@ -44,14 +47,9 @@ public class MainActivity extends AppCompatActivity implements Response.ErrorLis
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        //Pega o fundo e adiciona um valor de Alpha
+        vBack = findViewById(R.id.lay_contentMain);
+        vBack.getBackground().setAlpha(90);
 
         //Busca dos dados do Layout
         et_login = (EditText) findViewById(R.id.loginAut);
@@ -66,7 +64,7 @@ public class MainActivity extends AppCompatActivity implements Response.ErrorLis
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
         String prefTeste = pref.getString(Constants.TOKEN, null);
         if (prefTeste != null) {
-            Intent i = new Intent(MainActivity.this, CadastroTreino.class);
+            Intent i = new Intent(MainActivity.this, Main2Activity.class);
             startActivity(i);
             finish();
         }
@@ -88,7 +86,7 @@ public class MainActivity extends AppCompatActivity implements Response.ErrorLis
     @Override
     public void onErrorResponse(VolleyError error) {
         progress.dismiss();
-        Toast.makeText(MainActivity.this, "Não funfou!", Toast.LENGTH_LONG).show();
+        Toast.makeText(MainActivity.this, "Você NÃO está CONECTADO!", Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -110,7 +108,7 @@ public class MainActivity extends AppCompatActivity implements Response.ErrorLis
                 editor.commit();
             }
 
-            Intent i = new Intent(MainActivity.this, CadastroTreino.class);
+            Intent i = new Intent(MainActivity.this, Main2Activity.class);
             startActivity(i);
             finish();
         }

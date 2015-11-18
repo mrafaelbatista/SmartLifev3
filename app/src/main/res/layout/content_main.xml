@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/lay_contentMain"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/smart_life_back"
@@ -17,26 +18,37 @@
         android:layout_marginTop="50dp"
         android:src="@drawable/smart_life" />
 
-    <EditText
-        android:id="@+id/loginAut"
-        android:layout_width="300dp"
-        android:layout_height="50dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="80dp"
-        android:background="#ffffff"
-        android:padding="10dp"
-        android:hint="@string/loginAut" />
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/tx_inputLay"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="75dp">
 
-    <EditText
-        android:id="@+id/senhaAut"
-        android:layout_width="300dp"
-        android:layout_height="50dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="10dp"
-        android:background="#ffffff"
-        android:padding="10dp"
-        android:password="true"
-        android:hint="@string/senhaAut" />
+        <EditText
+            android:id="@+id/loginAut"
+            android:layout_width="300dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_horizontal"
+            android:hint="@string/loginAut"
+            android:padding="10dp" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/tx_inputLay2"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp">
+
+        <EditText
+            android:id="@+id/senhaAut"
+            android:layout_width="300dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_horizontal"
+            android:hint="@string/senhaAut"
+            android:padding="10dp"
+            android:password="true" />
+    </android.support.design.widget.TextInputLayout>
+
 
     <LinearLayout
         android:layout_width="300dp"
@@ -58,8 +70,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="60dp"
-            android:text="@string/acessarAut"
-            android:onClick="autenticarLogin"/>
+            android:onClick="autenticarLogin"
+            android:text="@string/acessarAut" />
 
     </LinearLayout>
 

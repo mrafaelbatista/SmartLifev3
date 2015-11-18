@@ -48,11 +48,4 @@ public class Treino extends SugarRecord<Treino> {
         this.atividades = atividades;
     }
 
-//    public ArrayList<Atividade> getListaAtividades() {
-//        return listaAtividades;
-//    }
-//
-//    public void setListaAtividades(ArrayList<Atividade> listaAtividades) {
-//        this.listaAtividades = listaAtividades;
-//    }
 }

@@ -1,11 +1,13 @@
 package br.com.mrafaelbatista.smartlifev3;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -14,6 +16,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import br.com.mrafaelbatista.smartlifev3.Controllers.ControllerCadastroTreino;
+import br.com.mrafaelbatista.smartlifev3.auxiliar.Constants;
 import br.com.mrafaelbatista.smartlifev3.models.Atividade;
 import br.com.mrafaelbatista.smartlifev3.models.Treino;
 
@@ -30,15 +33,6 @@ public class CadastroTreino extends AppCompatActivity {
         setContentView(R.layout.activity_cadastrar_treino);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
         nomeTreino = (EditText) findViewById(R.id.nomeTreino);
         objTreino = (EditText) findViewById(R.id.objTreino);
@@ -64,7 +58,7 @@ public class CadastroTreino extends AppCompatActivity {
 
         if (atividades != null) {
             for (Atividade a : atividades) {
-                if(atividadeParaLista == null) {
+                if (atividadeParaLista == null) {
                     atividadeParaLista = "- " + a.getNomeAtividade() + "\n";
                 } else {
                     atividadeParaLista = atividadeParaLista + "- " + a.getNomeAtividade() + "\n";
@@ -77,6 +71,42 @@ public class CadastroTreino extends AppCompatActivity {
         }
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main2, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        if (id == R.id.mn_sair) {
+
+            //Antes de fechar limpar o Shared Preferences
+            SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
+            SharedPreferences.Editor editor = pref.edit();
+            editor.putString(Constants.TOKEN, null);
+            editor.putString(Constants.MANTER_CONECTADO, null);
+            editor.commit();
+
+            Intent intent = new Intent(Intent.ACTION_MAIN);
+            intent.addCategory(Intent.CATEGORY_HOME);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+            startActivity(intent);
+            finish();
+            System.exit(0);
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
     public void adicionarAtividade(View v) {
 
         //Receber a instância desta classe e armazenar para enviar por Intent
@@ -86,30 +116,33 @@ public class CadastroTreino extends AppCompatActivity {
         //Envia instância da classe por Intent
         Intent i = new Intent(CadastroTreino.this, CadastroAtividades.class);
         startActivity(i);
+        finish();
     }
 
-    public void salvarTreino (View v) {
+    public void salvarTreino(View v) {
 
-        String nT = (String) nomeTreino.getText().toString();
-        String oT = (String) objTreino.getText().toString();
+        String nT = nomeTreino.getText().toString();
+        String oT = objTreino.getText().toString();
         String aT;
         StringBuffer strBuffer = new StringBuffer();
 
         ArrayList<Atividade> alAtv = (ArrayList) ControllerCadastroTreino.getInstance().getListaAtividades();
-        for (Atividade a : atividades) {
-            strBuffer.append(a);
-            }
 
-        aT = strBuffer.toString();
+        if (alAtv != null) {
+            for (Atividade a : atividades) {
+                strBuffer.append(a);
+            }
+            aT = strBuffer.toString();
+        } else {
+            aT = "";
+        }
 
 
         Treino tr = new Treino(nT, oT, aT);
         tr.save();
         Toast.makeText(this, "Treino CADASTRADO com SUCESSO", Toast.LENGTH_LONG).show();
 
-
-        //Realizando teste
-        Intent i = new Intent(CadastroTreino.this, ListaTreino.class);
+        Intent i = new Intent(CadastroTreino.this, Main2Activity.class);
         startActivity(i);
     }
 
